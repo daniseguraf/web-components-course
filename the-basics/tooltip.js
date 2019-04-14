@@ -2,8 +2,21 @@ class Tooltip extends HTMLElement {
   constructor() {
     super();
     this._tooltipContainer;
-    this._tooltipText = 'Some dummy tooltip text.'
+    this._tooltipText = 'Default text.'
     this.attachShadow({mode: 'open'})
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        div {
+          background-color: black;
+          color: white;
+          position: absolute;
+          z-index: 10;
+        }
+      </style>
+      <slot></slot>
+      <span>(?)</span>
+    `
   }
 
   connectedCallback() {
@@ -11,12 +24,10 @@ class Tooltip extends HTMLElement {
       this._tooltipText = this.getAttribute('text');
     }
 
-    const tooltipIcon = document.createElement('span');
-    tooltipIcon.textContent = ' (?)';
+    const tooltipIcon = this.shadowRoot.querySelector('span');
 
     tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
     tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
-
     this.shadowRoot.appendChild(tooltipIcon)
   }
 
@@ -29,7 +40,6 @@ class Tooltip extends HTMLElement {
   _hideTooltip() {
     this.shadowRoot.removeChild(this._tooltipContainer)
   }
-
 }
 
 customElements.define('uc-tooltip', Tooltip);
