@@ -13,10 +13,30 @@ class Tooltip extends HTMLElement {
           position: absolute;
           z-index: 10;
         }
+
+        :host {
+          background: #ccc;
+        }
+
+        .highlight {
+          background-color: red;
+        }
+
+        ::slotted(.highlight) {
+          border-bottom: 2px dotted pink;
+        }
+
+        .icon {
+          background: black;
+          color: white;
+          padding: 0.15rem 0.5rem;
+          text-align: center;
+          border-radius: 50%;
+        }
       </style>
-      <slot></slot>
-      <span>(?)</span>
-    `
+
+      <slot></slot><span class="icon">?</span>
+    `;
   }
 
   connectedCallback() {
