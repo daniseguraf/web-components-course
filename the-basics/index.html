@@ -6,21 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Web Components</title>
   <style>
-    div {
-      border: 2px solid orange;
+    * {
+      box-sizing: border-box;
     }
-    .highlight {
-      /* background-color: yellowgreen; */
-    }
-    uc-tooltip {
-      border: 2px solid blue;
+
+    html {
+      --color-primary: #a4e6fc;
+      font-family: sans-serif;
     }
   </style>
   <script src="tooltip.js"></script>
   <script src="confirm-link.js"></script>
 </head>
 <body>
-  <p><uc-tooltip text="An attribute message"><span class="highlight">Text slot</span></uc-tooltip> are awesome!</p>
+  <p><uc-tooltip class="important" text="An attribute message"><span class="highlight">Text slot</span></uc-tooltip> are awesome!</p>
 
   <uc-tooltip>Here we go!</uc-tooltip>
   <a is="uc-confirm-link" href="http://google.com">Google</a>
